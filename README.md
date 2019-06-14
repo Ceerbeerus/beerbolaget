@@ -8,12 +8,13 @@ systembolaget:
 
 ### Options
 
-|Name        |Default  |Supported options |
-|api_key     |null     |True/False        |
-|show_beer   |False    |True/False        |
-|show_wine   |False    |True/False        |
-|show_whisky |False    |True/False        |
+| Name           | Default      | Supported options                                | Description                                                                                                                                                                                                                                                                                                                                   |
+| -------------- | ------------ | ------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|api_key         |null          |True/False                                        |API key to access the api owned by Systembolaget
 
+|show_beer       |False         |True/False                                        |Show all new beers available in next release
 
-| Name           | Type        | Default      | Supported options                                | Description                                                                                                                                                                                                                                                                                                                                   |
-| -------------- | ----------- | ------------ | ------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|show_wine       |False         |True/False                                        |Show all new wine available in next release
+
+|show_whisky     |False         |True/False                                        |Show all new whisky available in next release
+
