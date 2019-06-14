@@ -8,7 +8,7 @@ systembolaget:
 
 ### Options
 
-| Name           | Default      | Supported options                                | Description                                                                                                                                                                                                                                                                                                                                   |
+|Name            |Default       |Supported options                                 |Description                                                                                                                                                                                                                                                                                                                                    |
 | -------------- | ------------ | ------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 |`api_key`       |`null`        |String                                            |API key to access the api owned by Systembolaget (https://api-portal.systembolaget.se/)
 |`show_beer`     |`False`       |`True`\|`False`                                   |Show all new beers available in next release
