@@ -18,8 +18,8 @@ REQUIREMENTS = ['requests==2.22.0']
 
 CONF_API_KEY = 'api_key'
 CONF_SHOW_BEER = 'show_beer'
-CONF_SHOW_WINE = 'show_wine'
 CONF_SHOW_WHISKY = 'show_whisky'
+CONF_SHOW_WINE = 'show_wine'
 
 DOMAIN = 'systembolaget'
 
@@ -28,8 +28,8 @@ CONFIG_SCHEMA = vol.Schema({
         vol.Optional(CONF_API_KEY, default=''):
             vol.All(cv.ensure_list, [cv.string]),
         vol.Optional(CONF_SHOW_BEER, default=False): cv.boolean,
-        vol.Optional(CONF_SHOW_WINE, default=False): cv.boolean,
-        vol.Optional(CONF_SHOW_WHISKY, default=False): cv.boolean
+        vol.Optional(CONF_SHOW_WHISKY, default=False): cv.boolean,
+        vol.Optional(CONF_SHOW_WINE, default=False): cv.boolean
     })
 }, extra=vol.ALLOW_EXTRA)
 
@@ -37,12 +37,12 @@ async def async_setup(hass, config):
     """Set up this component"""
     conf_api_key = config[DOMAIN][CONF_API_KEY]
     conf_beer = config[DOMAIN][CONF_SHOW_BEER]
+    conf_whisky = config[DOMAIN][CONF_SHOW_WHISKY]
     conf_wine = config[DOMAIN][CONF_SHOW_WINE]
-    conf_whisky = config[DOMAIN][CONF_SHOW_WINE]
 
-    _LOGGER.info('if you have any issues with this component, please report them here:'
-                 ' https://github.com/Ceerbeerus/systembolaget')
-    _LOGGER.debug('Version %s', VERSION)
+    _LOGGER.info("if you have any issues with this component, please report them here:"
+                 " https://github.com/Ceerbeerus/systembolaget")
+    _LOGGER.debug("Version %s", VERSION)
 
     latest_release = release(hass, conf_api_key, conf_beer, conf_wine, conf_whisky)
 
@@ -56,17 +56,17 @@ async def async_setup(hass, config):
 class release():
     def __init__(self, hass, conf_api_key, conf_beer, conf_wine, conf_whisky):
         _LOGGER.debug('Systembolaget - __init__')
-        self.hass = hass
         self.api_key = conf_api_key
         self.beer = conf_beer
-        self.wine = conf_wine
+        self.hass = hass
         self.whisky = conf_whisky
+        self.wine = conf_wine
 
     def check_release(self):
         state = True
         attributes = {
             'beer': self.beer,
-            'wine': self.wine,
-            'whisky': self.whisky
+            'whisky': self.whisky,
+            'wine': self.wine
         }
         self.hass.states.async_set('sensor.systembolaget_new_release', state, attributes)
