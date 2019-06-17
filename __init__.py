@@ -5,7 +5,6 @@ https://github.com/Ceerbeerus/systembolaget
 """
 import logging
 import os.path
-from datetime import datetime
 
 import voluptuous as vol
 import homeassistant.helpers.config_validation as cv
@@ -14,7 +13,7 @@ VERSION = '0.0.1'
 
 _LOGGER = logging.getLogger(__name__)
 
-REQUIREMENTS = ['requests==2.22.0']
+REQUIREMENTS = ['pybeerbolaget==0.0.5']
 
 CONF_API_KEY = 'api_key'
 CONF_SHOW_BEER = 'show_beer'
@@ -47,7 +46,7 @@ async def async_setup(hass, config):
     latest_release = release(hass, conf_api_key, conf_beer, conf_wine, conf_whisky)
 
     async def check_release_service(call):
-        latest_release.check_release()
+        await latest_release.check_release()
 
     hass.services.async_register(DOMAIN, 'check_release', check_release_service)
     return True
@@ -56,17 +55,22 @@ async def async_setup(hass, config):
 class release():
     def __init__(self, hass, conf_api_key, conf_beer, conf_wine, conf_whisky):
         _LOGGER.debug('Systembolaget - __init__')
+        from pybeerbolaget.ha_custom.beer import beer_handler
         self.hass = hass
         self.api_key = conf_api_key
-        self.beer = conf_beer
+        self.beer = beer_handler(self.api_key, True)
         self.wine = conf_wine
         self.whisky = conf_whisky
+        self.release = None
 
-    def check_release(self):
-        state = True
+    async def check_release(self):
+        beers = []
+        await self.beer.update_new_beers()
+        self.release = await self.beer.get_release()
+        beers = await self.beer.get_beers()
         attributes = {
-            'beer': self.beer,
+            'beer': beers,
             'wine': self.wine,
             'whisky': self.whisky
         }
-        self.hass.states.async_set('sensor.systembolaget_new_release', state, attributes)
+        self.hass.states.async_set('sensor.systembolaget_new_release', self.release, attributes)
