@@ -13,7 +13,7 @@ VERSION = '0.0.1'
 
 _LOGGER = logging.getLogger(__name__)
 
-REQUIREMENTS = ['pybeerbolaget==0.0.5']
+REQUIREMENTS = ['pybeerbolaget==0.0.6']
 
 CONF_API_KEY = 'api_key'
 CONF_SHOW_BEER = 'show_beer'
