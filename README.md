@@ -12,7 +12,7 @@ To add this component to your home assistant configuration, just type the follow
 | -------------- | ------------ | ------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 |`api_key`       |`None`        |`String`                                          |API key to access the api owned by systembolaget.se (https://api-portal.systembolaget.se/)
 |`ratebeer`      |`None`        |`String`                                          |API key to access the api owned by ratebeer.com
-|`untappd`       |`None`        |`String`                                          |API key to access the api owned by untappd.com.
+|`untappd`       |`None`        |`String`                                          |API key to access the api owned by untappd.com
 #### Example
   ```yaml
   systembolaget:
