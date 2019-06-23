@@ -14,7 +14,7 @@ VERSION = '0.0.1'
 
 _LOGGER = logging.getLogger(__name__)
 
-REQUIREMENTS = ['beerbolaget==0.0.36b0']
+REQUIREMENTS = ['beerbolaget==0.0.36b3']
 
 CONF_API_KEY = 'api_key'
 CONF_RATEBEER = 'ratebeer'
