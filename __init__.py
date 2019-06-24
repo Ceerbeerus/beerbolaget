@@ -3,7 +3,7 @@ A component which allows you to view the latest
 batch of beer at the swedish Systembolaget.
 For more details about this component,
 please refer to the documentation at
-https://github.com/Ceerbeerus/systembolaget
+https://github.com/Ceerbeerus/beerbolaget
 """
 import logging
 
