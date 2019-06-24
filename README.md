@@ -2,11 +2,12 @@
 Custom home assistant component for systembolaget.
 
 ## Setup
-To add this component to your home assistant configuration, just type the following in your configuration.yaml
+To add this component to your home assistant configuration download the files and place it under <config_dir>/custom_components. Then type the following in your configuration.yaml
 
 `beerbolaget:`
 
-### Options
+### Required/Options
+`api_key` is required to use this component.
 
 |Name            |Default       |Supported options                                 |Description                                                                                                                                                                                                                                                                                                                                    |
 | -------------- | ------------ | ------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
