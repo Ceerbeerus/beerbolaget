@@ -16,7 +16,7 @@ To add this component to your home assistant configuration download the files an
 |`untappd`       |`None`        |`String`                                          |API key to access the api owned by untappd.com
 #### Example
   ```yaml
-  systembolaget:
+  beerbolaget:
     api_key: !secret systembolaget
     ratebeer: !secret ratebeer
     untappd: !secret untappd
