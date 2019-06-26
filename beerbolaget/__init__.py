@@ -13,7 +13,7 @@ import voluptuous as vol
 from homeassistant.const import EVENT_HOMEASSISTANT_START
 from homeassistant.helpers.event import async_track_time_interval
 
-VERSION = '0.0.2'
+VERSION = '0.0.3'
 
 _LOGGER = logging.getLogger(__name__)
 
