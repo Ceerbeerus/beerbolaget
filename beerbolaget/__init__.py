@@ -13,7 +13,7 @@ import voluptuous as vol
 from homeassistant.const import EVENT_HOMEASSISTANT_START
 from homeassistant.helpers.event import async_track_time_interval
 
-VERSION = '0.0.3'
+VERSION = '0.0.4'
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -27,7 +27,7 @@ CONF_UNTAPPD = 'untappd'
 
 DOMAIN = 'beerbolaget'
 
-INTERVAL = timedelta(days=1)
+INTERVAL = timedelta(hours=1)
 
 CONFIG_SCHEMA = vol.Schema({
     DOMAIN: vol.Schema({
