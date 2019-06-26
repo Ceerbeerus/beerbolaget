@@ -13,11 +13,11 @@ import voluptuous as vol
 from homeassistant.const import EVENT_HOMEASSISTANT_START
 from homeassistant.helpers.event import async_track_time_interval
 
-VERSION = '0.0.4'
+VERSION = '0.0.5'
 
 _LOGGER = logging.getLogger(__name__)
 
-REQUIREMENTS = ['beerbolaget==0.0.36b6']
+REQUIREMENTS = ['beerbolaget==0.0.36b7']
 
 CONF_API_KEY = 'api_key'
 CONF_IMAGE_URL = 'image_url'
