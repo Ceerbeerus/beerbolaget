@@ -13,7 +13,7 @@ import voluptuous as vol
 from homeassistant.const import EVENT_HOMEASSISTANT_START
 from homeassistant.helpers.event import async_track_time_interval
 
-VERSION = '0.0.5'
+VERSION = '0.0.6'
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -88,7 +88,7 @@ class release():
                                          conf_untappd)
         self.release = None
 
-    async def check_release(self):
+    async def check_release(self, now=None):
         beers = []
         await self.beer_handler.get_store_info()
         await self.beer_handler.update_new_beers()
