@@ -1,10 +1,9 @@
 # Beerbolaget
-Custom home assistant component for systembolaget.
+Beerbolaget is a component for fetching information about the latest available beer at the swedish Systembolaget,
+also known as "Små partier".
 
 ## Setup
-To add this component to your home assistant configuration, download the folder (beerbolaget) and place it under <config_dir>/custom_components, or install it through [HACS](https://github.com/custom-components/hacs).
-
-Then type the following in your configuration.yaml
+Type the following in your configuration.yaml
 
 `beerbolaget:`
 
