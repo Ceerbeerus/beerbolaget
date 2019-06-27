@@ -1,0 +1,8 @@
+{
+  "domain": "beerbolaget",
+  "name": "Beerbolaget",
+  "documentation": "https://github.com/Ceerbeerus/beerbolaget",
+  "dependencies": [],
+  "codeowners": ["@Ceerbeerus" ],
+  "requirements": ["beerbolaget==0.0.36b7"]
+}

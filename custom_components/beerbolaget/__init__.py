@@ -13,11 +13,9 @@ import voluptuous as vol
 from homeassistant.const import EVENT_HOMEASSISTANT_START
 from homeassistant.helpers.event import async_track_time_interval
 
-VERSION = '0.0.6'
+__version__ = '0.0.7'
 
 _LOGGER = logging.getLogger(__name__)
-
-REQUIREMENTS = ['beerbolaget==0.0.36b7']
 
 CONF_API_KEY = 'api_key'
 CONF_IMAGE_URL = 'image_url'
@@ -55,7 +53,7 @@ async def async_setup(hass, config):
     _LOGGER.info("if you have any issues with this component,"
                  " please report them here:"
                  " https://github.com/Ceerbeerus/beerbolaget")
-    _LOGGER.debug("Version %s", VERSION)
+    _LOGGER.debug("Version %s", __version__)
 
     latest_release = release(hass, conf_api_key, conf_image_url,
                              conf_ratebeer, conf_store, conf_untappd)
