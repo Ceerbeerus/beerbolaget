@@ -1,7 +1,3 @@
-# Beerbolaget
-Beerbolaget is a component for fetching information about the latest available beer at the swedish Systembolaget,
-also known as "Små partier".
-
 ## What can beerbolaget do?
 * Show the latest batch of beer available (or which will become available current week).
 * Supply image information for available beer.
