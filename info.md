@@ -2,6 +2,16 @@
 Beerbolaget is a component for fetching information about the latest available beer at the swedish Systembolaget,
 also known as "Små partier".
 
+## What can beerbolaget do?
+* Show the latest batch of beer available (or which will become available current week).
+* Supply image information for available beer.
+* Show availability of those beers at choosen local store.
+
+## Upcoming features
+* Display the beers rating using data from [ratebeer](https://www.ratebeer.com/)
+* Display the beers rating using data from [untappd](http://untappd.com/)
+* Show availability of those beers at the webstore.
+
 ## Setup
 Type the following in your configuration.yaml
 
