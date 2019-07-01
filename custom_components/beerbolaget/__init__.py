@@ -6,16 +6,24 @@ please refer to the documentation at
 https://github.com/Ceerbeerus/beerbolaget
 """
 import logging
-from datetime import timedelta
 
 import homeassistant.helpers.config_validation as cv
 import voluptuous as vol
-from homeassistant.const import EVENT_HOMEASSISTANT_START
-from homeassistant.helpers.event import async_track_time_interval
+from homeassistant.helpers.discovery import load_platform
 
-__version__ = '0.0.7'
+__version__ = '0.1.2'
 
 _LOGGER = logging.getLogger(__name__)
+
+BEERBOLAGET_HANDLE = 'beerbolaget_handle'
+
+BEERBOLAGET_SENSORS = [
+    'beerbolaget_release'
+]
+
+BEERBOLAGET_TYPES = [
+    'sensor'
+]
 
 CONF_API_KEY = 'api_key'
 CONF_IMAGE_URL = 'image_url'
@@ -25,7 +33,6 @@ CONF_UNTAPPD = 'untappd'
 
 DOMAIN = 'beerbolaget'
 
-INTERVAL = timedelta(hours=1)
 
 CONFIG_SCHEMA = vol.Schema({
     DOMAIN: vol.Schema({
@@ -55,46 +62,39 @@ async def async_setup(hass, config):
                  " https://github.com/Ceerbeerus/beerbolaget")
     _LOGGER.debug("Version %s", __version__)
 
-    latest_release = release(hass, conf_api_key, conf_image_url,
-                             conf_ratebeer, conf_store, conf_untappd)
+    handle = beer_handle(conf_api_key, conf_image_url,
+                         conf_ratebeer, conf_store, conf_untappd)
 
-    hass.bus.async_listen_once(EVENT_HOMEASSISTANT_START,
-                               latest_release.check_release())
+    hass.data[BEERBOLAGET_HANDLE] = handle
 
-    async_track_time_interval(
-                hass, latest_release.check_release, INTERVAL)
+    for component in BEERBOLAGET_TYPES:
+        load_platform(hass, component, DOMAIN, {}, config)
 
-    async def check_release_service(call):
-        await latest_release.check_release()
-
-    hass.services.async_register(DOMAIN, 'check_release',
-                                 check_release_service)
     return True
 
 
-class release():
-    def __init__(self, hass, conf_api_key, conf_image_url,
+class beer_handle():
+    def __init__(self, conf_api_key, conf_image_url,
                  conf_ratebeer, conf_store, conf_untappd):
-        _LOGGER.debug("Systembolaget - __init__")
+        _LOGGER.debug("Beerbolaget - __init__")
         from beerbolaget.ha_custom.beer import beer_handler
-        self.hass = hass
-        self.api_key = conf_api_key
-        self.beer_handler = beer_handler(self.api_key,
-                                         conf_image_url,
-                                         conf_ratebeer,
-                                         conf_store,
-                                         conf_untappd)
-        self.release = None
+        self.beer_handle = beer_handler(conf_api_key,
+                                        conf_image_url,
+                                        conf_ratebeer,
+                                        conf_store,
+                                        conf_untappd)
 
-    async def check_release(self, now=None):
-        beers = []
-        await self.beer_handler.get_store_info()
-        await self.beer_handler.update_new_beers()
-        await self.beer_handler.get_images()
-        self.release = await self.beer_handler.get_release()
-        beers = await self.beer_handler.get_beers()
-        attributes = {
-            'beer': beers
-        }
-        self.hass.states.async_set('sensor.beerbolaget_new_release',
-                                   self.release, attributes)
+    async def get_store_info(self):
+        return await self.beer_handle.get_store_info()
+
+    async def update_beers(self):
+        return await self.beer_handle.update_new_beers()
+
+    async def get_beers(self):
+        return await self.beer_handle.get_beers()
+
+    async def get_images(self):
+        return await self.beer_handle.get_images()
+
+    async def get_release(self):
+        return await self.beer_handle.get_release()
