@@ -1,10 +1,15 @@
-# Beerbolaget
-Custom home assistant component for systembolaget.
+## What can beerbolaget do?
+* Show the latest batch of beer available (or which will become available current week).
+* Supply image information for available beer.
+* Show availability of those beers at choosen local store.
+
+## Upcoming features
+* Display the beers rating using data from [ratebeer](https://www.ratebeer.com/)
+* Display the beers rating using data from [untappd](http://untappd.com/)
+* Show availability of those beers at the webstore.
 
 ## Setup
-To add this component to your home assistant configuration, download the folder (beerbolaget) and place it under <config_dir>/custom_components, or install it through [HACS](https://github.com/custom-components/hacs).
-
-Then type the following in your configuration.yaml
+Type the following in your configuration.yaml
 
 `beerbolaget:`
 
