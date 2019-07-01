@@ -2,7 +2,7 @@
 Sensor platform for Beerbolaget.
 """
 import logging
-from datetime import timedelta
+from datetime import date, datetime, timedelta
 
 from custom_components.beerbolaget import (BEERBOLAGET_HANDLE,
                                            BEERBOLAGET_SENSORS)
@@ -38,6 +38,10 @@ class release(Entity):
         return self._name
 
     @property
+    def friendly_name(self):
+        return self._name
+
+    @property
     def icon(self):
         return 'mdi:beer'
 
@@ -55,4 +59,14 @@ class release(Entity):
         await self._beer_handler.update_beers()
         await self._beer_handler.get_images()
         self._state = await self._beer_handler.get_release()
-        self._attributes['release'] = await self._beer_handler.get_beers()
+        self._attributes['beverages'] = await self._beer_handler.get_beers()
+
+        if self._state:
+            release_date = datetime.strptime(self._state, '%Y-%m-%d').date()
+            dt = date.today()
+            start_of_week = dt - timedelta(days=dt.weekday())
+            end_of_week = start_of_week + timedelta(days=6)
+            if start_of_week < release_date < end_of_week:
+                self._attributes['new_release_this_week'] = True
+            else:
+                self._attributes['new_release_this_week'] = False
