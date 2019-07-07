@@ -58,6 +58,7 @@ class release(Entity):
         await self._beer_handler.get_store_info()
         await self._beer_handler.update_beers()
         await self._beer_handler.get_images()
+        await self._beer_handler.get_ratings()
         self._state = await self._beer_handler.get_release()
         self._attributes['beverages'] = await self._beer_handler.get_beers()
 
