@@ -29,8 +29,8 @@ Type the following in your configuration.yaml
   ```yaml
   beerbolaget:
     api_key: !secret systembolaget
-    image_url: https://example.com/api
-    store: Avenyn
+    image_url: "https://example.com/api"
+    store: "Avenyn"
     untappd_client_id: !secret untappd_client
     untappd_secret: !secret untappd_secret
   ```
