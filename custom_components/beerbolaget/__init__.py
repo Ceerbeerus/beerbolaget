@@ -11,7 +11,7 @@ import homeassistant.helpers.config_validation as cv
 import voluptuous as vol
 from homeassistant.helpers.discovery import load_platform
 
-__version__ = '0.1.5'
+__version__ = '0.1.6'
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -65,8 +65,12 @@ async def async_setup(hass, config):
                  " https://github.com/Ceerbeerus/beerbolaget")
     _LOGGER.debug("Version %s", __version__)
 
-    handle = beer_handle(conf_api_key, conf_image_url,
-                         conf_ratebeer, conf_store, conf_untappd_client_id, conf_untappd_secret)
+    handle = beer_handle(conf_api_key,
+                         conf_image_url,
+                         conf_ratebeer,
+                         conf_store,
+                         conf_untappd_client_id,
+                         conf_untappd_secret)
 
     hass.data[BEERBOLAGET_HANDLE] = handle
 
@@ -77,8 +81,13 @@ async def async_setup(hass, config):
 
 
 class beer_handle():
-    def __init__(self, conf_api_key, conf_image_url,
-                 conf_ratebeer, conf_store, conf_untappd_client_id, conf_untappd_secret):
+    def __init__(self,
+                 conf_api_key,
+                 conf_image_url,
+                 conf_ratebeer,
+                 conf_store,
+                 conf_untappd_client_id,
+                 conf_untappd_secret):
         _LOGGER.debug("Beerbolaget - __init__")
         from beerbolaget.ha_custom.beer import beer_handler
         self.beer_handle = beer_handler(conf_api_key,
@@ -105,3 +114,6 @@ class beer_handle():
 
     async def get_release(self):
         return await self.beer_handle.get_release()
+
+    async def get_store(self):
+        return await self.beer_handle.get_store()

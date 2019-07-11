@@ -61,6 +61,7 @@ class release(Entity):
         await self._beer_handler.get_ratings()
         self._state = await self._beer_handler.get_release()
         self._attributes['beverages'] = await self._beer_handler.get_beers()
+        self._attributes['local_store'] = await self._beer_handler.get_store()
 
         if self._state:
             release_date = datetime.strptime(self._state, '%Y-%m-%d').date()
