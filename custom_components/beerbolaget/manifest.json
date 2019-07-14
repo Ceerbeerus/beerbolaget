@@ -4,5 +4,5 @@
   "documentation": "https://github.com/Ceerbeerus/beerbolaget",
   "dependencies": [],
   "codeowners": ["@Ceerbeerus" ],
-  "requirements": ["beerbolaget==0.1.4"]
+  "requirements": ["beerbolaget==0.1.5"]
 }

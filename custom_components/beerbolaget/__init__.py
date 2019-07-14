@@ -11,7 +11,7 @@ import homeassistant.helpers.config_validation as cv
 import voluptuous as vol
 from homeassistant.helpers.discovery import load_platform
 
-__version__ = '0.2.0'
+__version__ = '0.2.1'
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -89,7 +89,7 @@ class beer_handle():
                  conf_untappd_client_id,
                  conf_untappd_secret):
         _LOGGER.debug("Beerbolaget - __init__")
-        from beerbolaget.ha_custom.beer import beer_handler
+        from beerbolaget.beer import beer_handler
         self.beer_handle = beer_handler(conf_api_key,
                                         conf_image_url,
                                         conf_ratebeer,
