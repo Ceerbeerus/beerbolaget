@@ -68,7 +68,8 @@ class release(Entity):
         self._attributes['local_store'] = await self._beer_handler.get_store()
 
         if self._attributes['release_date']:
-            release_date = datetime.strptime(self._state, '%Y-%m-%d').date()
+            release_date = datetime.strptime(self._attributes['release_date'],
+                                             '%Y-%m-%d').date()
             dt = date.today()
             start_of_week = dt - timedelta(days=dt.weekday())
             end_of_week = start_of_week + timedelta(days=6)
