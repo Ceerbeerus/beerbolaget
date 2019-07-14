@@ -50,8 +50,8 @@ class release(Entity):
         return self._state
 
     @property
-    def unit(self):
-        return 'Release current week'
+    def unit_of_measurement(self):
+        return "Release current week"
 
     @property
     def state_attributes(self):
