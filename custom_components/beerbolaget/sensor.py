@@ -50,6 +50,10 @@ class release(Entity):
         return self._state
 
     @property
+    def unit(self):
+        return 'Release current week'
+
+    @property
     def state_attributes(self):
         return self._attributes
 
@@ -59,16 +63,16 @@ class release(Entity):
         await self._beer_handler.update_beers()
         await self._beer_handler.get_images()
         await self._beer_handler.get_ratings()
-        self._state = await self._beer_handler.get_release()
+        self._attributes['release_date'] = await self._beer_handler.get_release()
         self._attributes['beverages'] = await self._beer_handler.get_beers()
         self._attributes['local_store'] = await self._beer_handler.get_store()
 
-        if self._state:
+        if self._attributes['release_date']:
             release_date = datetime.strptime(self._state, '%Y-%m-%d').date()
             dt = date.today()
             start_of_week = dt - timedelta(days=dt.weekday())
             end_of_week = start_of_week + timedelta(days=6)
             if start_of_week < release_date < end_of_week:
-                self._attributes['new_release_this_week'] = True
+                self._state = True
             else:
-                self._attributes['new_release_this_week'] = False
+                self._state = False
