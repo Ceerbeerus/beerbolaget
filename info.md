@@ -34,3 +34,23 @@ Type the following in your configuration.yaml
     untappd_client_id: !secret untappd_client
     untappd_secret: !secret untappd_secret
   ```
+  
+  ### Automation example
+  ```yaml
+  # Beerbolaget release notification
+  - alias: Beerbolaget Release
+    initial_state: on
+    trigger:
+      platform: state
+      entity_id: sensor.beerbolaget
+      from: 'False'
+      to: 'True'
+    action:
+      service: notify.mobile_app_xxx_iphone
+      data:
+        title: "Beerbolaget"
+        message: "Nya Små partier: {{ states.sensor.beerbolaget.attributes.release_date }}"
+        data:
+          push:
+            badge: 0
+  ```
