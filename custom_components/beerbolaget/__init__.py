@@ -11,7 +11,7 @@ import homeassistant.helpers.config_validation as cv
 import voluptuous as vol
 from homeassistant.helpers.discovery import load_platform
 
-__version__ = '0.2.7'
+__version__ = '0.2.9'
 
 _LOGGER = logging.getLogger(__name__)
 
