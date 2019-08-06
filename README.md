@@ -7,6 +7,7 @@ Beerbolaget is a component which shows the latest beer available at Systembolage
 * Supply image information for available beer.
 * Show availability of those beers at choosen local store.
 * Display the beers rating using data from [untappd](http://untappd.com/)
+* Display which beers you have previously checked in using [untappd](http://untappd.com/), and the rating you gave.
 
 ## Upcoming features
 * Display the beers rating using data from [ratebeer](https://www.ratebeer.com/)
@@ -24,12 +25,13 @@ Then type the following in your configuration.yaml
 
 |Name            |Default       |Supported options                                 |Description                                                                                                                                                                                                                                                                                                                                    |
 | --------------     | ------------ | ------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|`api_key`           |`None`        |`String`                                          |API key to access the api owned by systembolaget.se (https://api-portal.systembolaget.se/)
+|`api_key`           |`None`        |`String`                                          |API key to access the api owned by [systembolaget.se](https://api-portal.systembolaget.se/)
 |`image_url`         |`None`        |`String`                                          |Source to use when collecting image data for available beer. (https://www.systembolaget.se/api/productsearch/search/sok-dryck)
 |`store`             |`None`        |`String`                                          |Local store to use when checking availability of beers. (https://www.systembolaget.se/butiker-ombud/)
 |`ratebeer`          |`None`        |`String`                                          |API key to access the api owned by ratebeer.com
 |`untappd_client_id` |`None`        |`String`                                          |API client id to access the api owned by untappd.com
 |`untappd_secret`    |`None`        |`String`                                          |API client secret to access the api owned by untappd.com
+|`untappd_token`     |`None`        |`String`                                          |API token to access the api [Untappd API token](https://untappd.com/api/docs#authentication)
 #### Example
   ```yaml
   beerbolaget:
@@ -38,6 +40,7 @@ Then type the following in your configuration.yaml
     store: "Avenyn"
     untappd_client_id: !secret untappd_client
     untappd_secret: !secret untappd_secret
+    untappd_token: !secret untappd_token
   ```
 ### Automation example
   ```yaml
