@@ -22,10 +22,10 @@ Type the following in your configuration.yaml
 | --------------     | ------------ | ------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 |`api_key`           |`None`        |`String`                                          |API key to access the api owned by [systembolaget.se](https://api-portal.systembolaget.se/)
 |`image_url`         |`None`        |`String`                                          |Source to use when collecting image data for available beer. (https://www.systembolaget.se/api/productsearch/search/sok-dryck)
-|`store`             |`None`        |`String`                                          |Local store to use when checking availability of beers. [Local stores](https://www.systembolaget.se/butiker-ombud/)
+|`store`             |`None`        |`String`                                          |[Local store](https://www.systembolaget.se/butiker-ombud/) to use when checking availability of beers.
 |`ratebeer`          |`None`        |`String`                                          |API key to access the api owned by ratebeer.com
-|`untappd_client_id` |`None`        |`String`                                          |API client id to access the api owned by untappd.com
-|`untappd_secret`    |`None`        |`String`                                          |API client secret to access the api owned by untappd.com
+|`untappd_client_id` |`None`        |`String`                                          |API client id to access the api owned by [untappd](http://untappd.com/)
+|`untappd_secret`    |`None`        |`String`                                          |API client secret to access the api owned by [untappd](http://untappd.com/)
 |`untappd_token`     |`None`        |`String`                                          |API token to access the api [Untappd API token](https://untappd.com/api/docs#authentication)
 
 #### Example
