@@ -24,7 +24,7 @@ Then type the following in your configuration.yaml
 ### Required/Options
 `api_key` is required to use this component.
 
-|Name            |Default       |Supported options                                 |Description                                                                                                                                                                                                                                                                                                                                    |
+|Name            |Default       |Supported options                                 |Description  |
 | -------------- | ------------ | ------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 |`api_key`           |`None`        |`String`                                          |API key to access the api owned by [systembolaget.se](https://api-portal.systembolaget.se/)
 |`image_url`         |`None`        |`String`                                          |Source to use when collecting image data for available beer. (https://www.systembolaget.se/api/productsearch/search/sok-dryck)
