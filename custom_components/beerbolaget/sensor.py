@@ -67,7 +67,7 @@ class release(Entity):
         self._attributes['beverages'] = await self._beer_handler.get_beers()
         self._attributes['local_store'] = await self._beer_handler.get_store()
 
-        if self._attributes['release_date']:
+        try:
             release_date = datetime.strptime(self._attributes['release_date'],
                                              '%Y-%m-%d').date()
             dt = date.today()
@@ -77,3 +77,5 @@ class release(Entity):
                 self._state = True
             else:
                 self._state = False
+        except:
+          self._state = False
