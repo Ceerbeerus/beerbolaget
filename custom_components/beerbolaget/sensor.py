@@ -74,8 +74,8 @@ class release(Entity):
             dt = date.today()
             start_of_week = dt - timedelta(days=dt.weekday())
             end_of_week = start_of_week + timedelta(days=6)
-            if self._state and (release_date != self._prev_release) and
-                (start_of_week < release_date < end_of_week):
+            if (self._state and (release_date != self._prev_release) and
+                (start_of_week < release_date < end_of_week)):
                 self._state = False
             elif start_of_week < release_date < end_of_week:
                 self._state = True
