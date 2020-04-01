@@ -31,6 +31,7 @@ class release(Entity):
         self._attributes = {}
         self._beer_handler = beer_handle
         self._name = name
+        self._prev_release = None
         self._state = None
 
     @property
@@ -73,9 +74,13 @@ class release(Entity):
             dt = date.today()
             start_of_week = dt - timedelta(days=dt.weekday())
             end_of_week = start_of_week + timedelta(days=6)
-            if start_of_week < release_date < end_of_week:
+            if self._state and (release_date != self._prev_release) and
+                (start_of_week < release_date < end_of_week):
+                self._state = False
+            elif start_of_week < release_date < end_of_week:
                 self._state = True
             else:
                 self._state = False
+            self._prev_release = release_date
         except:
           self._state = False
