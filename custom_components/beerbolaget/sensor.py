@@ -84,3 +84,8 @@ class release(Entity):
             self._prev_release = release_date
         except:
           self._state = False
+
+        release = list(set([d['release_date'] for d in self._attributes['beverages']]))
+        release.sort()
+        self._attributes['release_date'] = ', '.join(release)
+
