@@ -65,13 +65,21 @@ class release(Entity):
         await self._beer_handler.update_beers()
         await self._beer_handler.get_images()
         await self._beer_handler.get_ratings()
-        self._attributes['release_date'] = await self._beer_handler.get_release()
+        _release = await self._beer_handler.get_release()
         self._attributes['beverages'] = await self._beer_handler.get_beers()
         self._attributes['local_store'] = await self._beer_handler.get_store()
 
         try:
-            release_date = datetime.strptime(self._attributes['release_date'],
-                                             '%Y-%m-%d').date()
+            release = list(set([d['release_date'].replace('T00:00:00', '') for d in self._attributes['beverages']]))
+            release.sort()
+            self._attributes['release_date'] = ', '.join(release)
+        except Exception as e:
+            self._attributes['release_date'] = _release
+
+        self._attributes['beverages'] = json.dumps(self._attributes['beverages'], ensure_ascii=False)
+
+        try:
+            release_date = datetime.strptime(_release, '%Y-%m-%d').date()
             dt = date.today()
             start_of_week = dt - timedelta(days=dt.weekday())
             end_of_week = start_of_week + timedelta(days=6)
@@ -86,7 +94,4 @@ class release(Entity):
         except:
           self._state = False
 
-        release = list(set([d['release_date'].replace('T00:00:00', '') for d in self._attributes['beverages']]))
-        release.sort()
-        self._attributes['release_date'] = ', '.join(release)
-        self._attributes['beverages'] = json.dumps(self._attributes['beverages'], ensure_ascii=False)
+
