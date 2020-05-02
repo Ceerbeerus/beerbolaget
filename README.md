@@ -1,5 +1,5 @@
 # Beerbolaget
-Beerbolaget is a component which shows the latest beer available at Systembolaget in Sweden, also known as "Små partier".
+Beerbolaget is a component which shows the latest beer available at Systembolaget in Sweden, also known as "Tillfälligt sortiment".
 This component is a great match with the custom card for Home Assistant, [Beerbolaget-Card](https://github.com/Ceerbeerus/beerbolaget-card).
 
 ## What can beerbolaget do?
