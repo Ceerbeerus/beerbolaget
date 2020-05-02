@@ -86,7 +86,7 @@ class release(Entity):
         except:
           self._state = False
 
-        release = list(set([d['release_date'] for d in self._attributes['beverages']]))
+        release = list(set([d['release_date'].replace('T00:00:00', '') for d in self._attributes['beverages']]))
         release.sort()
         self._attributes['release_date'] = ', '.join(release)
         self._attributes['beverages'] = json.dumps(self._attributes['beverages'], ensure_ascii=False)
