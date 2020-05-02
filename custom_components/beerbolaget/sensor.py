@@ -3,6 +3,7 @@ Sensor platform for Beerbolaget.
 """
 import logging
 from datetime import date, datetime, timedelta
+import json
 
 from custom_components.beerbolaget import (BEERBOLAGET_HANDLE,
                                            BEERBOLAGET_SENSORS)
@@ -88,4 +89,4 @@ class release(Entity):
         release = list(set([d['release_date'] for d in self._attributes['beverages']]))
         release.sort()
         self._attributes['release_date'] = ', '.join(release)
-
+        self._attributes['beverages'] = json.dumps(self._attributes['beverages'], ensure_ascii=False)
