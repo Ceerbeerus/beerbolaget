@@ -16,7 +16,7 @@ This component is a great match with the custom card for Home Assistant, [Beerbo
 
 ## Releases
 ### 0.4.0
-* Untappd auth-flow integrated in component for getting api token.
+* Untappd auth-flow integrated for getting api token.
 #### Breaking changes
 * untappd_token option is now replaced with untappd_callback
   (This is the callback specified in the api key request to untappd. Required format [YOUR HA URL]/api/untappd)
