@@ -12,9 +12,10 @@ import voluptuous as vol
 
 from homeassistant.components.http import HomeAssistantView
 from homeassistant.core import callback
+
 from homeassistant.helpers.discovery import load_platform
 
-__version__ = '0.4.0'
+__version__ = '0.3.24'
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -90,7 +91,7 @@ class UntappdAuthCallbackView(HomeAssistantView):
         hass = request.app['hass']
         _code = request.query['code']
         try:
-            hass.async_add_executor_job(self.auth.cache_token, _code)
+            await hass.async_add_executor_job(self.auth.cache_token, _code)
         except Exception as e:
             _LOGGER.error("couldn't write token: ({})".format(e))
             pass
@@ -98,7 +99,7 @@ class UntappdAuthCallbackView(HomeAssistantView):
             setup, hass, self.config)
 
 
-def setup(hass, config, discovery_info=None):
+def setup(hass, config):
     """Set up this component"""
     from beerbolaget.rating import oauth
     conf_api_key = config[DOMAIN][CONF_API_KEY]
@@ -171,23 +172,23 @@ class beer_handle():
                                         conf_untappd_secret,
                                         conf_untappd_token)
 
-    async def get_store_info(self):
-        await self.beer_handle.get_store_info()
+    def get_store_info(self):
+        self.beer_handle.get_store_info()
 
-    async def update_beers(self):
-        await self.beer_handle.update_new_beers()
+    def update_beers(self):
+        self.beer_handle.update_new_beers()
 
-    async def get_beers(self):
-        return await self.beer_handle.get_beers()
+    def get_beers(self):
+        return self.beer_handle.get_beers()
 
-    async def get_images(self):
-        await self.beer_handle.get_images()
+    def get_images(self):
+        self.beer_handle.get_images()
 
-    async def get_ratings(self):
-        await self.beer_handle.get_ratings()
+    def get_ratings(self):
+        self.beer_handle.get_ratings()
 
-    async def get_release(self):
-        return await self.beer_handle.get_release()
+    def get_release(self):
+        return self.beer_handle.get_release()
 
-    async def get_store(self):
-        return await self.beer_handle.get_store()
+    def get_store(self):
+        return self.beer_handle.get_store()

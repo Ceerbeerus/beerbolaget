@@ -17,18 +17,19 @@ _LOGGER = logging.getLogger(__name__)
 INTERVAL = timedelta(hours=1)
 
 
-def setup_platform(hass, config, add_entities, discovery_info=None):
+async def async_setup_platform(hass, config, async_add_entities, discovery_info=None):
     """Setup Beerbolaget handle"""
     beer_handle = hass.data[BEERBOLAGET_HANDLE]
 
     for sensor in BEERBOLAGET_SENSORS:
-        add_entities([release(beer_handle, sensor)], True)
+        async_add_entities([release(hass, beer_handle, sensor)], True)
 
 
 class release(Entity):
     """Implementation of beerbolaget sensor"""
-    def __init__(self, beer_handle, name):
+    def __init__(self, hass, beer_handle, name):
         _LOGGER.debug("Beerbolaget sensor - __init__")
+        self.hass = hass
         self._attributes = {}
         self._beer_handler = beer_handle
         self._name = name
@@ -61,13 +62,13 @@ class release(Entity):
 
     @Throttle(INTERVAL)
     async def async_update(self):
-        await self._beer_handler.get_store_info()
-        await self._beer_handler.update_beers()
-        await self._beer_handler.get_images()
-        await self._beer_handler.get_ratings()
-        _release = await self._beer_handler.get_release()
-        self._attributes['beverages'] = await self._beer_handler.get_beers()
-        self._attributes['local_store'] = await self._beer_handler.get_store()
+        await self.hass.async_add_executor_job(self._beer_handler.get_store_info)
+        await self.hass.async_add_executor_job(self._beer_handler.update_beers)
+        await self.hass.async_add_executor_job(self._beer_handler.get_images)
+        await self.hass.async_add_executor_job(self._beer_handler.get_ratings)
+        _release = await self.hass.async_add_executor_job(self._beer_handler.get_release)
+        self._attributes['beverages'] = await self.hass.async_add_executor_job(self._beer_handler.get_beers)
+        self._attributes['local_store'] = await self.hass.async_add_executor_job(self._beer_handler.get_store)
 
         try:
             release = list(set([d['release_date'].replace('T00:00:00', '')
@@ -75,8 +76,8 @@ class release(Entity):
             release.sort()
             self._attributes['release_date'] = ', '.join(release)
         except Exception as e:
-            self._attributes['release_date'] = _release
             _LOGGER.info("Trying, release date of beverages: ({})".format(e))
+            self._attributes['release_date'] = _release
 
         self._attributes['beverages'] = json.dumps(
             self._attributes['beverages'], ensure_ascii=False)
