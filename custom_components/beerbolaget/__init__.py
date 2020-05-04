@@ -90,7 +90,7 @@ class UntappdAuthCallbackView(HomeAssistantView):
         hass = request.app['hass']
         _code = request.query['code']
         try:
-            hass.async_add_executor_job(self.auth.cache_token, _code)
+            await hass.async_add_executor_job(self.auth.cache_token, _code)
         except Exception as e:
             _LOGGER.error("couldn't write token: ({})".format(e))
             pass
