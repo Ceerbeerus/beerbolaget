@@ -10,6 +10,13 @@
 * Display the beers rating using data from [ratebeer](https://www.ratebeer.com/)
 * Show availability of those beers at the webstore.
 
+## Releases
+### 0.4.0
+* Untappd auth-flow integrated in component for getting api token.
+#### Breaking changes
+* untappd_token option is now replaced with untappd_callback
+  (This is the callback specified in the api key request to untappd. Required format [YOUR HA URL]/api/untappd)
+
 ## Setup
 Type the following in your configuration.yaml
 
@@ -25,7 +32,7 @@ Type the following in your configuration.yaml
 |`store`             |`None`        |`String`                                          |[Local store](https://www.systembolaget.se/butiker-ombud/) to use when checking availability of beers.
 |`untappd_client_id` |`None`        |`String`                                          |API client id to access the api owned by [untappd](http://untappd.com/)
 |`untappd_secret`    |`None`        |`String`                                          |API client secret to access the api owned by [untappd](http://untappd.com/)
-|`untappd_token`     |`None`        |`String`                                          |API token to access the api [Untappd API token](https://untappd.com/api/docs#authentication)
+|`untappd_callback`  |`None`        |`String`                                          |Callback specifed in the request for an untappd api key. (Required format: [YOUR HA URL]/api/untappd)
 
 #### Example
   ```yaml
