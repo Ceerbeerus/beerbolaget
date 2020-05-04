@@ -14,6 +14,13 @@ This component is a great match with the custom card for Home Assistant, [Beerbo
 * Display the beers rating using data from [ratebeer](https://www.ratebeer.com/)
 * Show availability of those beers at the webstore.
 
+## Releases
+### 0.4.0
+* Untappd auth-flow integrated to get api token.
+#### Breaking changes
+* untappd_token option is now replaced with untappd_callback
+  (This is the callback specified in the api key request to untappd. Required format [YOUR HA URL]/api/untappd)
+
 ## Setup
 To add this component to your home assistant configuration, download the folder (beerbolaget) and place it under <config_dir>/custom_components, or install it through [HACS](https://github.com/custom-components/hacs).
 
@@ -31,7 +38,7 @@ Then type the following in your configuration.yaml
 |`store`             |`None`        |`String`                                          |[Local store](https://www.systembolaget.se/butiker-ombud/) to use when checking availability of beers.
 |`untappd_client_id` |`None`        |`String`                                          |API client id to access the api owned by [untappd](http://untappd.com/)
 |`untappd_secret`    |`None`        |`String`                                          |API client secret to access the api owned by [untappd](http://untappd.com/)
-|`untappd_token`     |`None`        |`String`                                          |API token to access the api [Untappd API token](https://untappd.com/api/docs#authentication)
+|`untappd_callback`  |`None`        |`String`                                          |The callback url submited to untappd requesting the api key. (Required format: [YOUR HA URL]/api/untappd)
 #### Example
   ```yaml
   beerbolaget:
@@ -40,7 +47,7 @@ Then type the following in your configuration.yaml
     store: "Avenyn"
     untappd_client_id: !secret untappd_client
     untappd_secret: !secret untappd_secret
-    untappd_token: !secret untappd_token
+    untappd_callback: http://my_ha_url.com:8123/api/untappd
   ```
 ### Automation example
   ```yaml
