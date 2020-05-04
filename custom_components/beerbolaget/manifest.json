@@ -3,6 +3,6 @@
   "name": "Beerbolaget",
   "documentation": "https://github.com/Ceerbeerus/beerbolaget",
   "dependencies": [],
-  "codeowners": ["@Ceerbeerus"],
-  "requirements": [ "beerbolaget==0.2.24" ]
+  "codeowners": [ "@Ceerbeerus" ],
+  "requirements": [ "beerbolaget==0.3.6" ]
 }

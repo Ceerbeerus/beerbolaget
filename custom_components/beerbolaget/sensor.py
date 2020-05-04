@@ -70,13 +70,16 @@ class release(Entity):
         self._attributes['local_store'] = await self._beer_handler.get_store()
 
         try:
-            release = list(set([d['release_date'].replace('T00:00:00', '') for d in self._attributes['beverages']]))
+            release = list(set([d['release_date'].replace('T00:00:00', '')
+                           for d in self._attributes['beverages']]))
             release.sort()
             self._attributes['release_date'] = ', '.join(release)
         except Exception as e:
             self._attributes['release_date'] = _release
+            _LOGGER.info("Trying, release date of beverages: ({})".format(e))
 
-        self._attributes['beverages'] = json.dumps(self._attributes['beverages'], ensure_ascii=False)
+        self._attributes['beverages'] = json.dumps(
+            self._attributes['beverages'], ensure_ascii=False)
 
         try:
             release_date = datetime.strptime(_release, '%Y-%m-%d').date()
@@ -84,14 +87,13 @@ class release(Entity):
             start_of_week = dt - timedelta(days=dt.weekday())
             end_of_week = start_of_week + timedelta(days=6)
             if (self._state and (release_date != self._prev_release) and
-                (start_of_week < release_date < end_of_week)):
+               (start_of_week < release_date < end_of_week)):
                 self._state = False
             elif start_of_week < release_date < end_of_week:
                 self._state = True
             else:
                 self._state = False
             self._prev_release = release_date
-        except:
-          self._state = False
-
-
+        except Exception as e:
+            self._state = False
+            _LOGGER.info("State based on release date error: ({})".format(e))
