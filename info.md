@@ -42,7 +42,7 @@ Type the following in your configuration.yaml
     store: "Avenyn"
     untappd_client_id: !secret untappd_client
     untappd_secret: !secret untappd_secret
-    untappd_token: !secret untappd_token
+    untappd_callback: http://my_ha_url.com:8123/api/untappd
   ```
   
   ### Automation example
