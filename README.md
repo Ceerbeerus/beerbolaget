@@ -38,7 +38,7 @@ Then type the following in your configuration.yaml
 |`store`             |`None`        |`String`                                          |[Local store](https://www.systembolaget.se/butiker-ombud/) to use when checking availability of beers.
 |`untappd_client_id` |`None`        |`String`                                          |API client id to access the api owned by [untappd](http://untappd.com/)
 |`untappd_secret`    |`None`        |`String`                                          |API client secret to access the api owned by [untappd](http://untappd.com/)
-|`untappd_callback`  |`None`        |`String`                                          |The callback url submited to untappd requesting the api key. ([your HA url]/api/untappd)
+|`untappd_callback`  |`None`        |`String`                                          |The callback url submited to untappd requesting the api key. (Required format: [YOUR HA URL]/api/untappd)
 #### Example
   ```yaml
   beerbolaget:
