@@ -120,8 +120,8 @@ def setup(hass, config, auth_ongoing=False):
                  conf_untappd_secret)
 
     token = auth.get_token_from_cache()
-    If not token:
-        If auth_ongoing:
+    if not token:
+        if auth_ongoing:
             return True
         
         if (conf_untappd_client_id and conf_untappd_secret and 
