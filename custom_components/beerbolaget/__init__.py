@@ -15,7 +15,7 @@ from homeassistant.core import callback
 
 from homeassistant.helpers.discovery import load_platform
 
-__version__ = '0.4.3'
+__version__ = '0.4.4'
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -122,6 +122,7 @@ def setup(hass, config, auth_ongoing=False):
     token = auth.get_token_from_cache()
     if not token:
         if auth_ongoing:
+            _LOGGER.error("Error caching token.")
             return True
         
         if (conf_untappd_client_id and conf_untappd_secret and 
