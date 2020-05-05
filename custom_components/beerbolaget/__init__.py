@@ -15,7 +15,7 @@ from homeassistant.core import callback
 
 from homeassistant.helpers.discovery import load_platform
 
-__version__ = '0.4.1'
+__version__ = '0.4.2'
 
 _LOGGER = logging.getLogger(__name__)
 
