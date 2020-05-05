@@ -15,7 +15,7 @@ from homeassistant.core import callback
 
 from homeassistant.helpers.discovery import load_platform
 
-__version__ = '0.4.0'
+__version__ = '0.4.1'
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -96,10 +96,10 @@ class UntappdAuthCallbackView(HomeAssistantView):
             _LOGGER.error("couldn't write token: ({})".format(e))
             pass
         hass.async_add_job(
-            setup, hass, self.config)
+            setup, hass, self.config, auth_ongoing=True)
 
 
-def setup(hass, config):
+def setup(hass, config, auth_ongoing=False):
     """Set up this component"""
     from beerbolaget.rating import oauth
     conf_api_key = config[DOMAIN][CONF_API_KEY]
@@ -120,13 +120,17 @@ def setup(hass, config):
                  conf_untappd_secret)
 
     token = auth.get_token_from_cache()
-    if (not token and conf_untappd_client_id and
-            conf_untappd_secret and conf_untappd_callback):
-        _LOGGER.info("no token; requesting authorization")
-        hass.http.register_view(UntappdAuthCallbackView(
-                                auth, config))
-        request_configuration(hass, config, auth)
-        return True
+    If not token:
+        If auth_ongoing:
+            return True
+        
+        if (conf_untappd_client_id and conf_untappd_secret and 
+            conf_untappd_callback):
+            _LOGGER.info("no token; requesting authorization")
+            hass.http.register_view(UntappdAuthCallbackView(
+                                    auth, config))
+            request_configuration(hass, config, auth)
+            return True
     if hass.data.get(DOMAIN):
         configurator = hass.components.configurator
         configurator.request_done(hass.data.get(DOMAIN))
