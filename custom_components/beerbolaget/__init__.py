@@ -96,7 +96,7 @@ class UntappdAuthCallbackView(HomeAssistantView):
             _LOGGER.error("couldn't write token: ({})".format(e))
             pass
         hass.async_add_job(
-            setup, hass, self.config, auth_ongoing=True)
+            setup, hass, self.config, True)
 
 
 def setup(hass, config, auth_ongoing=False):
