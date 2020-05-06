@@ -15,7 +15,7 @@ from homeassistant.core import callback
 
 from homeassistant.helpers.discovery import load_platform
 
-__version__ = '0.4.4'
+__version__ = '0.4.5'
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -89,8 +89,8 @@ class UntappdAuthCallbackView(HomeAssistantView):
     async def get(self, request):
         """Receive authorization token."""
         hass = request.app['hass']
-        _code = request.query['code']
         try:
+            _code = request.query['code']
             await hass.async_add_executor_job(self.auth.cache_token, _code)
         except Exception as e:
             _LOGGER.error("couldn't write token: ({})".format(e))
