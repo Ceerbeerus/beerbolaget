@@ -15,7 +15,7 @@ from homeassistant.core import callback
 
 from homeassistant.helpers.discovery import load_platform
 
-__version__ = '0.4.6'
+__version__ = '0.4.7'
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -33,6 +33,7 @@ BEERBOLAGET_TYPES = [
 ]
 
 CONF_API_KEY = 'api_key'
+CONF_CACHE_PATH = 'cache_path'
 CONF_IMAGE_URL = 'image_url'
 CONF_RATEBEER = 'ratebeer'
 CONF_STORE = 'store'
@@ -53,6 +54,7 @@ DOMAIN = 'beerbolaget'
 CONFIG_SCHEMA = vol.Schema({
     DOMAIN: vol.Schema({
         vol.Optional(CONF_API_KEY, default=''): cv.string,
+        vol.Optional(CONF_CACHE_PATH, default=''): cv.string,
         vol.Optional(CONF_IMAGE_URL, default=''): cv.string,
         vol.Optional(CONF_RATEBEER, default=''): cv.string,
         vol.Optional(CONF_STORE, default=''): cv.string,
@@ -103,6 +105,7 @@ def setup(hass, config, auth_ongoing=False):
     """Set up this component"""
     from beerbolaget.rating import oauth
     conf_api_key = config[DOMAIN][CONF_API_KEY]
+    conf_cache_path = config[DOMAIN][CONF_CACHE_PATH]
     conf_image_url = config[DOMAIN][CONF_IMAGE_URL]
     conf_ratebeer = config[DOMAIN][CONF_RATEBEER]
     conf_store = config[DOMAIN][CONF_STORE]
@@ -114,7 +117,8 @@ def setup(hass, config, auth_ongoing=False):
         _LOGGER.error("API_KEY is required to use this component.")
         return False
 
-    auth = oauth(DEFAULT_CACHE_PATH,
+    cache_path = conf_cache_path if conf_cache_path else DEFAULT_CACHE_PATH
+    auth = oauth(cache_path,
                  conf_untappd_callback,
                  conf_untappd_client_id,
                  conf_untappd_secret)
