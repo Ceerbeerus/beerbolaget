@@ -35,6 +35,7 @@ class release(Entity):
         self._name = name
         self._prev_release = None
         self._state = None
+        await self.hass.async_add_executor_job(self._beer_handler.get_store_info)
 
     @property
     def name(self):
@@ -62,7 +63,6 @@ class release(Entity):
 
     @Throttle(INTERVAL)
     async def async_update(self):
-        await self.hass.async_add_executor_job(self._beer_handler.get_store_info)
         await self.hass.async_add_executor_job(self._beer_handler.update_beers)
         await self.hass.async_add_executor_job(self._beer_handler.get_images)
         await self.hass.async_add_executor_job(self._beer_handler.get_ratings)
