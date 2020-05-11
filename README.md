@@ -31,14 +31,15 @@ Then type the following in your configuration.yaml
 ### Required/Options
 `api_key` is required to use this component.
 
-|Name            |Default       |Supported options                                 |Description  |
-| -------------- | ------------ | ------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|`api_key`           |`None`        |`String`                                          |API key to access the api owned by [systembolaget.se](https://api-portal.systembolaget.se/)
-|`image_url`         |`None`        |`String`                                          |Source to use when collecting image data for available beer. (https://www.systembolaget.se/api/productsearch/search/sok-dryck)
-|`store`             |`None`        |`String`                                          |[Local store](https://www.systembolaget.se/butiker-ombud/) to use when checking availability of beers.
-|`untappd_client_id` |`None`        |`String`                                          |API client id to access the api owned by [untappd](http://untappd.com/)
-|`untappd_secret`    |`None`        |`String`                                          |API client secret to access the api owned by [untappd](http://untappd.com/)
-|`untappd_callback`  |`None`        |`String`                                          |The callback url submited to untappd requesting the api key. (Required format: [YOUR HA URL]/api/untappd)
+|Name            |Required/Option      |Default       |Supported options                                 |Description  |
+| -------------- |---------------------| ------------ | ------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|`api_key`           |`Required`       |`None`        |`String`                                          |API key to access the api owned by [systembolaget.se](https://api-portal.systembolaget.se/)
+|`image_url`         |`Option`         |`None`        |`String`                                          |Source to use when collecting image data for available beer. (https://www.systembolaget.se/api/productsearch/search/sok-dryck)
+|`store`             |`Option`         |`None`        |`String`                                          |[Local store](https://www.systembolaget.se/butiker-ombud/) to use when checking availability of beers.
+|`untappd_client_id` |`Option`         |`None`        |`String`                                          |API client id to access the api owned by [untappd](http://untappd.com/)
+|`untappd_secret`    |`Option`         |`None`        |`String`                                          |API client secret to access the api owned by [untappd](http://untappd.com/)
+|`untappd_callback`  |`Option`         |`None`        |`String`                                          |The callback url submited to untappd requesting the api key. (Required format: [YOUR HA URL]/api/untappd)
+|`cache_path`        |`Option`         |`None`        |`String`                                          |File to use for caching the Untappd token
 #### Example
   ```yaml
   beerbolaget:
