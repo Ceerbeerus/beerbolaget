@@ -35,7 +35,7 @@ class release(Entity):
         self._name = name
         self._prev_release = None
         self._state = None
-        self._beer_handler.get_store_info()
+        await self.hass.async_add_executor_job(self._beer_handler.get_store_info)
 
     @property
     def name(self):
